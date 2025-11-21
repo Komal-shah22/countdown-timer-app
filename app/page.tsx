@@ -70,9 +70,12 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-black transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <Header />
       <main className="flex-grow flex flex-col items-center justify-center p-4 overflow-hidden">
+        <h1 className="text-3xl sm:text-4xl font-bold text-green-500 dark:text-green-400 mb-10">
+          Countdown Timer
+        </h1>
         <div className={animation}>
             {renderPage()}
         </div>

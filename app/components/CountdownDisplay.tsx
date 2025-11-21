@@ -38,12 +38,12 @@ const CountdownDisplay: React.FC<CountdownDisplayProps> = ({
   if (isFinished) {
     return (
       <div className="text-center animate-pulse">
-        <h2 className="text-4xl font-bold text-green-300">
+        <h2 className="text-4xl font-bold text-gray-800 dark:text-green-300">
           Countdown Finished!
         </h2>
         <button
           onClick={onReset}
-          className="mt-6 px-8 py-3 bg-green-800/30 backdrop-blur-sm border border-green-500 rounded-lg text-white font-semibold shadow-lg hover:bg-green-700/40 transition-all duration-300"
+          className="mt-6 px-8 py-3 bg-green-400/30 dark:bg-green-800/30 backdrop-blur-sm border border-green-500/50 rounded-lg text-gray-800 dark:text-white font-semibold shadow-lg hover:scale-105 hover:shadow-green-500/20 hover:bg-green-400/50 dark:hover:bg-green-700/40 transition-all duration-300 active:scale-95 active:shadow-inner"
         >
           Start New Countdown
         </button>
@@ -80,4 +80,5 @@ const CountdownDisplay: React.FC<CountdownDisplayProps> = ({
 };
 
 export default CountdownDisplay;
+
 
