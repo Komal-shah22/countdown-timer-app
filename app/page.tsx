@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { useTimer } from './hooks/useTimer';
@@ -8,26 +8,37 @@ import StartPage from './components/StartPage';
 import CountdownInputPage from './components/CountdownInputPage';
 import CountdownDisplay from './components/CountdownDisplay';
 
+type Page = 'start' | 'input' | 'display';
+
 export default function Home() {
-  const [page, setPage] = useState<'start' | 'input' | 'display'>('start');
+  const [page, setPage] = useState<Page>('start');
+  const [animation, setAnimation] = useState('animate-fade-in-up');
   const [targetDate, setTargetDate] = useState('');
   const { timeLeft, isActive, isFinished, start, pause, reset } = useTimer(targetDate);
 
+  const changePage = (newPage: Page) => {
+    setAnimation('animate-slide-out-left');
+    setTimeout(() => {
+      setPage(newPage);
+      setAnimation('animate-slide-in-right');
+    }, 500); // Duration of the slide-out animation
+  };
+
   const handleGoToInput = () => {
-    setPage('input');
+    changePage('input');
   };
 
   const handleStartCountdown = () => {
     if (targetDate) {
       start();
-      setPage('display');
+      changePage('display');
     }
   };
 
   const handleResetAll = () => {
     setTargetDate('');
     reset();
-    setPage('start');
+    changePage('start');
   };
 
   const renderPage = () => {
@@ -59,10 +70,10 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-black transition-colors duration-300">
       <Header />
       <main className="flex-grow flex flex-col items-center justify-center p-4 overflow-hidden">
-        <div className="animate-fade-in-up">
+        <div className={animation}>
             {renderPage()}
         </div>
       </main>

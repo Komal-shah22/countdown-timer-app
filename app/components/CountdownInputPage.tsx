@@ -15,10 +15,10 @@ const CountdownInputPage: React.FC<CountdownInputPageProps> = ({
 }) => {
   return (
     <div className="text-center">
-      <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+      <h1 className="text-4xl font-bold text-green-300 mb-4">
         Countdown to Your Big Day
       </h1>
-      <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+      <p className="text-lg text-green-400 mb-8">
         Select a date and time to start the countdown.
       </p>
       <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
@@ -26,11 +26,11 @@ const CountdownInputPage: React.FC<CountdownInputPageProps> = ({
           type="datetime-local"
           value={targetDate}
           onChange={(e) => onTargetDateChange(e.target.value)}
-          className="p-3 border rounded-lg bg-white/30 dark:bg-gray-800/50 text-gray-800 dark:text-gray-100 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="p-3 border border-green-500/50 rounded-lg bg-black/30 text-green-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-400"
         />
         <button
           onClick={onStartCountdown}
-          className="px-8 py-3 bg-blue-500/50 backdrop-blur-sm border border-blue-400/60 rounded-lg text-white font-semibold shadow-lg hover:bg-blue-500/70 transition-all duration-300 transform hover:scale-105"
+          className="px-8 py-3 bg-green-800/30 backdrop-blur-sm border border-green-500 rounded-lg text-white font-semibold shadow-lg hover:bg-green-700/40 transition-all duration-300 transform hover:scale-105"
         >
           Start Countdown
         </button>
@@ -40,3 +40,4 @@ const CountdownInputPage: React.FC<CountdownInputPageProps> = ({
 };
 
 export default CountdownInputPage;
+
