@@ -5,10 +5,14 @@ import { Sun, Moon } from 'lucide-react';
 
 const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const theme = localStorage.getItem('theme');
-    if (theme === 'dark') {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (theme === 'dark' || (!theme && prefersDark)) {
       setIsDarkMode(true);
       document.documentElement.classList.add('dark');
     }
@@ -25,13 +29,25 @@ const Header = () => {
     setIsDarkMode(!isDarkMode);
   };
 
+  if (!mounted) return null;
+
   return (
-    <header className="absolute top-0 right-0 p-4 bg-transparent z-10">
+    <header className="absolute top-0 right-0 p-6 bg-transparent z-20">
       <button
         onClick={toggleDarkMode}
-        className="p-2 rounded-full text-gray-800 dark:text-gray-100 bg-gray-200/50 dark:bg-gray-700/50 backdrop-blur-sm"
+        className="group relative p-3 rounded-full text-gray-800 dark:text-gray-100 bg-gray-200/70 dark:bg-gray-700/70 backdrop-blur-md border border-gray-300 dark:border-gray-600 hover:scale-110 hover:rotate-12 transition-all duration-300 shadow-lg hover:shadow-green-500/20"
+        aria-label="Toggle dark mode"
       >
-        {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
+        <div className="relative">
+          {isDarkMode ? (
+            <Sun size={24} className="animate-spin-slow" />
+          ) : (
+            <Moon size={24} />
+          )}
+        </div>
+        <span className="absolute -bottom-8 right-0 text-xs bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+          {isDarkMode ? 'Light' : 'Dark'} mode
+        </span>
       </button>
     </header>
   );
